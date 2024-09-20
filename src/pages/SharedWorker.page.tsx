@@ -4,6 +4,12 @@ import Navigation from "./components/Navigation.component";
 
 const SharedWorkerPage = () => {
   const [bg, setBg] = useState<"purple" | "" | "yellow">("");
+
+  const myWorker = new SharedWorker(new URL('../workers/sharedWorker.ts', import.meta.url), {
+    type: 'module',
+    name: 'my worker',
+  }).port;
+
   const handleChangeBG = (e: any) => {
     e.preventDefault();
     if (bg) {
@@ -12,6 +18,11 @@ const SharedWorkerPage = () => {
   };
   const handleMakeSuperArray = (e: any) => {
     e.preventDefault();
+    myWorker.start();
+    myWorker.postMessage('start');
+    myWorker.onmessage = (e => {
+      alert(e.data)
+    })
   };
 
   useEffect(() => {

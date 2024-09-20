@@ -20,7 +20,7 @@ const Navigation = () => {
         disabled={handleGetIsHome()}
         onClick={() => navigate("/")}
       >
-        to home
+        to no workers
       </button>
       <button
         disabled={handleGetMatch("/dedicatedWorker")}
